@@ -53,13 +53,13 @@ window.__require = function e(t, n, r) {
         this.node_y = this.node.y;
         cc.director.getCollisionManager().enabled = true;
         this._down = false;
-        this.node.on(cc.Node.EventType.MOUSE_DOWN, function(event) {
+        this.node.on(cc.Node.EventType.TOUCH_START, function(event) {
           if (!this.dragStatus) return;
           cc.log("Drag stated ...");
           this._down = true;
           this.propagate || event.stopPropagation();
         }, this);
-        this.node.on(cc.Node.EventType.MOUSE_MOVE, function(event) {
+        this.node.on(cc.Node.EventType.TOUCH_MOVE, function(event) {
           if (!this.dragStatus) return;
           if (!this._down) {
             event.stopPropagation();
@@ -70,15 +70,7 @@ window.__require = function e(t, n, r) {
           this.node.y += delta.y;
           this.propagate || event.stopPropagation();
         }, this);
-        this.node.on(cc.Node.EventType.MOUSE_LEAVE, function(event) {
-          if (!this.dragStatus) return;
-          if (!this._down) {
-            event.stopPropagation();
-            return;
-          }
-          this._down = false;
-        }, this);
-        this.node.on(cc.Node.EventType.MOUSE_UP, function(event) {
+        this.node.on(cc.Node.EventType.TOUCH_END, function(event) {
           if (!this._down) {
             event.stopPropagation();
             return;
@@ -99,24 +91,28 @@ window.__require = function e(t, n, r) {
         }, this);
       },
       onCollisionEnter: function onCollisionEnter(other) {
-        this.tuched = true;
-        this.otherNode = other.node.getComponent("word");
+        var that = this;
+        that.tuched = true;
+        that.otherNode = other.node.getComponent("word");
         var other_text = "";
-        this.otherNode ? other_text = this.otherNode.text : other_text = "";
-        var self_text = this.text;
-        self_text == other_text ? this.isCorrect = true : this.isCorrect = false;
+        other_text = that.otherNode ? that.otherNode.text : "";
+        var self_text = that.text;
+        that.isCorrect = self_text == other_text;
       },
       onCollisionStay: function onCollisionStay(other) {},
       onCollisionExit: function onCollisionExit() {
-        this.tuched = false;
-        console.log(this.tuched);
+        var that = this;
+        that.tuched = false;
+        console.log(that.tuched);
       },
       reset: function reset() {
-        this.node.x = this.node_x;
-        this.node.y = this.node_y;
+        var that = this;
+        that.node.x = that.node_x;
+        that.node.y = that.node_y;
       },
       setDragStatus: function setDragStatus(flag) {
-        this.dragStatus = flag;
+        var that = this;
+        that.dragStatus = flag;
       }
     });
     cc._RF.pop();
@@ -287,7 +283,10 @@ window.__require = function e(t, n, r) {
           var rad = 3.14 * this.ang / 180;
           this.node.x = this.radius * Math.cos(rad);
           this.node.y = this.radius * Math.sin(rad) - 150;
-          this.ang > 270 && (this.startStatus = false);
+          if (this.ang > 270) {
+            this.startStatus = false;
+            this.ang = -90;
+          }
         }
       }
     });
