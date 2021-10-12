@@ -167,9 +167,25 @@ window.__require = function e(t, n, r) {
         orderArr: [ 7 ],
         currentIndex: 0
       },
+      makeResponsive: function makeResponsive() {
+        var canvas = this.node;
+        var deviceResolution = cc.view.getFrameSize();
+        console.log(canvas);
+        var desiredRatio = canvas.width / canvas.height;
+        var deviceRatio = deviceResolution.width / deviceResolution.height;
+        if (deviceRatio >= desiredRatio) {
+          canvas.fitHeight = true;
+          canvas.fitWidth = false;
+        } else if (deviceRatio < desiredRatio) {
+          canvas.fitHeight = false;
+          canvas.fitWidth = true;
+        }
+      },
       onLoad: function onLoad() {
-        cc.debug.setDisplayStats(false);
         var that = this;
+        cc.view.getFrameSize(800, 600);
+        cc.debug.setDisplayStats(false);
+        cc.view.enableRetina(true);
         for (var i = 0; i < 7; i++) that.orderArr[i] = i;
       },
       randomIntFromInterval: function randomIntFromInterval(min, max) {

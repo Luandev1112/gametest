@@ -2,6 +2,16 @@ window.boot = function () {
     var settings = window._CCSettings;
     window._CCSettings = undefined;
     var onProgress = null;
+
+    var div = document.getElementById('GameDiv');
+    var divHeight = div.offsetHeight;
+    var bodyHeight = window.innerHeight;
+    console.log(bodyHeight);
+    var divOldwidth = div.offsetWidth;
+    var divWidth = Math.floor(divOldwidth * (bodyHeight / divHeight));
+    divHeight = bodyHeight - 6;
+    div.setAttribute("style","width:"+divWidth+"px;height:"+divHeight+"px");
+    console.log(divWidth, bodyHeight);
     
     let { RESOURCES, INTERNAL, MAIN, START_SCENE } = cc.AssetManager.BuiltinBundleName;
     function setLoadingDisplay () {

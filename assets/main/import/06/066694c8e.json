@@ -827,7 +827,7 @@
         "array": [
           0,
           0,
-          290.118510267787,
+          300.01014417663737,
           0,
           0,
           0,
@@ -1047,7 +1047,10 @@
         }
       ],
       "_color": {
-        "__type__": "cc.Color"
+        "__type__": "cc.Color",
+        "r": 68,
+        "g": 172,
+        "b": 206
       },
       "_contentSize": {
         "__type__": "cc.Size",
@@ -1100,7 +1103,10 @@
         }
       ],
       "_color": {
-        "__type__": "cc.Color"
+        "__type__": "cc.Color",
+        "r": 68,
+        "g": 172,
+        "b": 206
       },
       "_contentSize": {
         "__type__": "cc.Size",
@@ -1152,7 +1158,10 @@
         }
       ],
       "_color": {
-        "__type__": "cc.Color"
+        "__type__": "cc.Color",
+        "r": 68,
+        "g": 172,
+        "b": 206
       },
       "_contentSize": {
         "__type__": "cc.Size",
@@ -1204,7 +1213,10 @@
         }
       ],
       "_color": {
-        "__type__": "cc.Color"
+        "__type__": "cc.Color",
+        "r": 68,
+        "g": 172,
+        "b": 206
       },
       "_contentSize": {
         "__type__": "cc.Size",
